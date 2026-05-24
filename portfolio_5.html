@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Portfolio — Xuzhe Lin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #e8291c;
+      --blue:   #4a7ab5;
+      --green:  #3a7d6e;
+      --ink:    #1a1410;
+      --cream:  #fdf8f0;
+      --paper:  #fff9ee;
+      --tape:   rgba(255,220,80,0.55);
+      --hand:   'Caveat', cursive;
+      --marker: 'Permanent Marker', cursive;
+      --type:   'Special Elite', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 27px,
+          rgba(180,200,220,0.18) 27px,
+          rgba(180,200,220,0.18) 28px
+        );
+      color: var(--ink);
+      font-family: var(--hand);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--red);
+      padding: 0.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--ink);
+      box-shadow: 0 3px 0 var(--ink);
+    }
+
+    .nav-logo {
+      font-family: var(--marker);
+      font-size: 1.3rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transform: rotate(-1deg);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.3rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-family: var(--hand);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.15rem 0.6rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 3px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* torn paper bottom edge */
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 30px;
+      background: var(--cream);
+      clip-path: polygon(0% 100%, 2% 40%, 4% 80%, 6% 20%, 9% 60%, 11% 10%, 13% 55%, 16% 30%, 19% 70%, 22% 15%, 25% 65%, 28% 35%, 31% 75%, 34% 20%, 37% 60%, 40% 10%, 43% 50%, 46% 25%, 49% 70%, 52% 15%, 55% 55%, 58% 30%, 61% 75%, 64% 20%, 67% 60%, 70% 10%, 73% 55%, 76% 35%, 79% 70%, 82% 15%, 85% 60%, 88% 30%, 91% 75%, 94% 20%, 97% 55%, 100% 40%, 100% 100%);
+      z-index: 2;
+    }
+
+    .hero-doodles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      font-family: var(--marker);
+      font-size: clamp(6rem, 18vw, 16rem);
+      color: rgba(232,41,28,0.06);
+      white-space: nowrap;
+      transform: rotate(-8deg);
+      top: 10%;
+      left: -2%;
+      line-height: 1;
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-tag {
+      font-family: var(--type);
+      font-size: 0.8rem;
+      color: var(--green);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 30px; height: 2px;
+      background: var(--green);
+    }
+
+    .hero-name {
+      font-family: var(--marker);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.95;
+      color: var(--ink);
+      transform: rotate(-1.5deg);
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    /* tape strip decoration */
+    .tape-strip {
+      display: inline-block;
+      background: var(--tape);
+      padding: 0.2rem 1.2rem;
+      transform: rotate(-0.8deg);
+      font-family: var(--hand);
+      font-size: 1rem;
+      color: var(--ink);
+      border-left: 2px solid rgba(200,160,0,0.3);
+      border-right: 2px solid rgba(200,160,0,0.3);
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      font-family: var(--hand);
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.7;
+      margin-top: 1.5rem;
+      transform: rotate(0.3deg);
+    }
+
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      font-family: var(--type);
+      font-size: 0.78rem;
+      color: var(--ink);
+      padding: 0.3rem 0.8rem;
+      border: 2px solid var(--ink);
+      border-radius: 2px;
+      background: #fff;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* ── INTRO ── */
+    #intro {
+      padding: 5rem 3rem 4rem;
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-num {
+      font-family: var(--marker);
+      font-size: 3rem;
+      color: var(--red);
+      line-height: 1;
+      opacity: 0.25;
+    }
+
+    .section-title {
+      font-family: var(--marker);
+      font-size: 2rem;
+      color: var(--ink);
+      transform: rotate(-0.5deg);
+    }
+
+    .intro-box {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 2px;
+      padding: 2rem 2.5rem;
+      max-width: 720px;
+      box-shadow: 5px 5px 0 var(--ink);
+      transform: rotate(0.4deg);
+      position: relative;
+    }
+
+    .intro-box::before {
+      content: '';
+      position: absolute;
+      top: -10px; left: 30px;
+      width: 60px; height: 18px;
+      background: var(--tape);
+      transform: rotate(-2deg);
+    }
+
+    .placeholder-note {
+      font-family: var(--hand);
+      font-size: 1rem;
+      color: #888;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    /* ── WORKS ── */
+    #works {
+      padding: 2rem 3rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── WORK ENTRY ── */
+    .work-entry {
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    /* coloured left margin stripe */
+    .work-entry::before {
+      content: '';
+      position: absolute;
+      left: -3rem;
+      top: 0; bottom: 0;
+      width: 4px;
+    }
+
+    .work-entry:nth-child(odd)::before  { background: var(--red); }
+    .work-entry:nth-child(even)::before { background: var(--blue); }
+
+    /* entry inner card */
+    .work-card {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 3px;
+      box-shadow: 5px 5px 0 var(--ink);
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .work-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    /* top colour bar per entry */
+    .work-card-bar {
+      height: 8px;
+    }
+
+    .work-entry:nth-child(1) .work-card-bar { background: var(--blue); }
+    .work-entry:nth-child(2) .work-card-bar { background: var(--red); }
+    .work-entry:nth-child(3) .work-card-bar { background: var(--green); }
+    .work-entry:nth-child(4) .work-card-bar { background: var(--blue); }
+    .work-entry:nth-child(5) .work-card-bar { background: var(--red); }
+    .work-entry:nth-child(6) .work-card-bar { background: var(--green); }
+
+    .work-card-inner {
+      padding: 2.5rem 2.8rem 3rem;
+    }
+
+    /* header row */
+    .work-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .work-number {
+      font-family: var(--marker);
+      font-size: 3.5rem;
+      line-height: 0.9;
+      color: var(--ink);
+      opacity: 0.15;
+      flex-shrink: 0;
+      width: 56px;
+    }
+
+    .work-title-block { flex: 1; min-width: 200px; }
+
+    .work-title {
+      font-family: var(--marker);
+      font-size: 1.8rem;
+      color: var(--ink);
+      line-height: 1.05;
+      transform: rotate(-0.5deg);
+      display: inline-block;
+    }
+
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .tag {
+      font-family: var(--type);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border: 2px solid var(--ink);
+      border-radius: 2px;
+      background: #fff;
+    }
+
+    .tag.week { background: var(--red); color: #fff; border-color: var(--red); }
+    .tag.blue  { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .tag.green { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* body: float layout */
+    .work-body { overflow: hidden; }
+
+    .work-media {
+      float: left;
+      width: 45%;
+      margin: 0 1.8rem 1rem 0;
+      border: 2px solid var(--ink);
+      background: #fff;
+      box-shadow: 3px 3px 0 var(--ink);
+      position: relative;
+      min-width: 200px;
+    }
+
+    /* tape on media corner */
+    .work-media::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: 18px;
+      width: 50px; height: 14px;
+      background: var(--tape);
+      transform: rotate(-1.5deg);
+      z-index: 1;
+    }
+
+    .work-media img,
+    .work-media video,
+    .work-media iframe {
+      width: 100%;
+      display: block;
+    }
+
+    .work-media-placeholder {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: var(--hand);
+      font-size: 0.85rem;
+      color: #aaa;
+      text-align: center;
+      padding: 1.5rem;
+      background: repeating-linear-gradient(
+        45deg,
+        #fafafa,
+        #fafafa 5px,
+        #f3f3f3 5px,
+        #f3f3f3 10px
+      );
+    }
+
+    .work-media-placeholder .ph-icon {
+      font-size: 2rem;
+      opacity: 0.25;
+    }
+
+    .reflection-label {
+      font-family: var(--marker);
+      font-size: 0.9rem;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .reflection-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, var(--red) 0, var(--red) 4px, transparent 4px, transparent 8px);
+    }
+
+    .reflection-text {
+      font-family: var(--hand);
+      font-size: 1.1rem;
+      line-height: 2.1;
+      color: #333;
+    }
+
+    .work-body::after { content: ''; display: table; clear: both; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: #fff;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--type);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; }
+      .nav-links a { font-size: 0.75rem; padding: 0.15rem 0.4rem; }
+      #hero { padding: 2rem 1.5rem 3rem; }
+      .hero-name { font-size: clamp(3rem, 15vw, 5rem); }
+      #intro { padding: 3rem 1.5rem; }
+      .intro-box { padding: 1.5rem; }
+      #works { padding: 1.5rem 1.5rem 3rem; }
+      .work-card-inner { padding: 1.2rem 1.2rem 1.5rem; }
+      .work-media {
+        float: none;
+        width: 100%;
+        margin: 0 0 1.2rem 0;
+      }
+      .work-title { font-size: 1.4rem; }
+      .work-number { font-size: 2.5rem; }
+      .reflection-text { font-size: 0.95rem; }
+      .hero-meta { gap: 0.5rem; }
+      .hero-meta-item { font-size: 0.7rem; padding: 0.25rem 0.6rem; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px) rotate(0.3deg);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+
+    /* ── DOODLE CIRCLES SVG decorations ── */
+    .doodle-corner {
+      position: absolute;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">✦ Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#intro">Intro</a></li>
+      <li><a href="#work-1">01</a></li>
+      <li><a href="#work-2">02</a></li>
+      <li><a href="#work-3">03</a></li>
+      <li><a href="#work-4">04</a></li>
+      <li><a href="#work-5">05</a></li>
+      <li><a href="#work-6">06</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-doodles">
+      <svg width="100%" height="100%" style="position:absolute;inset:0;" xmlns="http://www.w3.org/2000/svg">
+        <!-- scattered circles like the blue paper artwork -->
+        <circle cx="88%" cy="15%" r="60" fill="none" stroke="#4a7ab5" stroke-width="2" opacity="0.12"/>
+        <circle cx="88%" cy="15%" r="40" fill="none" stroke="#4a7ab5" stroke-width="1.5" opacity="0.1"/>
+        <circle cx="88%" cy="15%" r="22" fill="none" stroke="#4a7ab5" stroke-width="1" opacity="0.08"/>
+        <circle cx="5%"  cy="70%" r="45" fill="none" stroke="#e8291c" stroke-width="2" opacity="0.1"/>
+        <circle cx="5%"  cy="70%" r="28" fill="none" stroke="#e8291c" stroke-width="1.5" opacity="0.08"/>
+        <circle cx="70%" cy="85%" r="35" fill="none" stroke="#3a7d6e" stroke-width="2" opacity="0.1"/>
+        <circle cx="92%" cy="60%" r="18" fill="none" stroke="#e8291c" stroke-width="1.5" opacity="0.08"/>
+        <circle cx="15%" cy="20%" r="25" fill="none" stroke="#3a7d6e" stroke-width="1.5" opacity="0.08"/>
+        <!-- wobbly cross marks -->
+        <line x1="80%" y1="40%" x2="83%" y2="43%" stroke="#1a1410" stroke-width="1.5" opacity="0.07"/>
+        <line x1="83%" y1="40%" x2="80%" y2="43%" stroke="#1a1410" stroke-width="1.5" opacity="0.07"/>
+        <line x1="20%" y1="85%" x2="22%" y2="87%" stroke="#1a1410" stroke-width="1.5" opacity="0.07"/>
+        <line x1="22%" y1="85%" x2="20%" y2="87%" stroke="#1a1410" stroke-width="1.5" opacity="0.07"/>
+      </svg>
+    </div>
+    <div class="hero-bg-text">CREATIVITY</div>
+    <div class="hero-content">
+      <p class="hero-tag">Creative Portfolio</p>
+      <h1 class="hero-name">Xuzhe<br>Lin</h1>
+      <div>
+        <span class="tape-strip">six works · collective creativity · no lone genius</span>
+      </div>
+      <p class="hero-desc">
+        A curated collection of creative works made across the semester —
+        exploring how creativity is distributed, borrowed, and built together.
+      </p>
+      <div class="hero-meta">
+        <span class="hero-meta-item">Unit: EDGU1001</span>
+        <span class="hero-meta-item">6 Works</span>
+        <span class="hero-meta-item">550028026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="section-header">
+      <span class="section-num">00</span>
+      <h2 class="section-title">Curatorial Introduction</h2>
+    </div>
+    <div class="intro-box reveal">
+      <p class="placeholder-note">
+        ← Add your curatorial introduction here (150–250 words).<br><br>
+        Explain the organising idea of your portfolio: what theme, strategy,
+        or conceptual thread connects these six works? Why did you select
+        them together?
+      </p>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+
+    <!-- ══ WORK 01 ══ -->
+    <div class="work-entry reveal" id="work-1">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">01</div>
+            <div class="work-title-block">
+              <h3 class="work-title">The Mariana Trench</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 2</span>
+                <span class="tag">Haiku</span>
+                <span class="tag">Collaborative Vocabulary</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div style="
+                background: #fdf6e3;
+                border: 2px solid var(--ink);
+                padding: 2rem 1.8rem 2.2rem;
+                min-height: 220px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+              ">
+                <!-- ruled lines -->
+                <div style="
+                  position: absolute; inset: 0;
+                  background: repeating-linear-gradient(
+                    0deg, transparent, transparent 31px,
+                    rgba(180,200,220,0.25) 31px, rgba(180,200,220,0.25) 32px
+                  );
+                  pointer-events: none;
+                "></div>
+                <!-- red margin line -->
+                <div style="
+                  position: absolute; top: 0; bottom: 0; left: 2.2rem;
+                  width: 1.5px; background: rgba(232,41,28,0.25);
+                  pointer-events: none;
+                "></div>
+                <div style="position: relative; padding-left: 1.2rem;">
+                  <p style="
+                    font-family: 'Permanent Marker', cursive;
+                    font-size: 0.85rem;
+                    color: var(--blue);
+                    letter-spacing: 0.08em;
+                    margin-bottom: 1.2rem;
+                    transform: rotate(-0.5deg);
+                    display: inline-block;
+                  ">— Haiku</p>
+                  <p style="
+                    font-family: 'Caveat', cursive;
+                    font-size: 1.45rem;
+                    font-weight: 700;
+                    color: var(--ink);
+                    line-height: 1.1;
+                    margin-bottom: 0.6rem;
+                    transform: rotate(-0.3deg);
+                    display: inline-block;
+                  ">Mariana Trench,</p><br>
+                  <p style="
+                    font-family: 'Caveat', cursive;
+                    font-size: 1.45rem;
+                    font-weight: 700;
+                    color: var(--ink);
+                    line-height: 1.1;
+                    margin-bottom: 0.6rem;
+                    transform: rotate(0.4deg);
+                    display: inline-block;
+                  ">Giant shapes swim silent</p><br>
+                  <p style="
+                    font-family: 'Caveat', cursive;
+                    font-size: 1.45rem;
+                    font-weight: 700;
+                    color: var(--ink);
+                    line-height: 1.1;
+                    transform: rotate(-0.2deg);
+                    display: inline-block;
+                  ">Deep sea mystery</p>
+                </div>
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              During the second week's activity, I wrote a haiku titled "The Mariana Trench". My intention was to capture the mystery of the ocean. Our entire class first brainstormed a shared vocabulary list about the ocean. I selected and combined 5 specific words from the list to form the final structure. This work is important because it taught me that creation does not have to start from scratch. Learning to draw on a collective resource pool reduces the anxiety of facing a blank page and makes getting started much easier.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ WORK 02 ══ -->
+    <div class="work-entry reveal" id="work-2">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">02</div>
+            <div class="work-title-block">
+              <h3 class="work-title">Rhythmic Soundscape</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 4</span>
+                <span class="tag blue">Audio / Sound</span>
+                <span class="tag">Group Collaboration</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div style="border: 2px solid var(--ink); position: relative;">
+                <iframe
+                  width="100%"
+                  height="240"
+                  src="https://www.youtube.com/embed/El-6Q26RKlo"
+                  title="Rhythmic Soundscape"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  style="display:block;">
+                </iframe>
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              During the fourth week's activity, our group created a rhythmic audio piece. Starting with no great ideas, we chose to combine the sounds of pen strokes on a desk, water bottle tapping, and vocal beats to build an unexpected soundtrack. We gathered to experiment with various object sounds and adjusted our individual rhythms to align with the team's overall beat. This work is significant because it perfectly explains team creativity — not based on someone's genius idea, but a simple pen click that inspired another member to add the dull sound of a water bottle, transforming each isolated noise into a cohesive work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ WORK 03 ══ -->
+    <div class="work-entry reveal" id="work-3">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">03</div>
+            <div class="work-title-block">
+              <h3 class="work-title">Secrets on the Beach</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 5</span>
+                <span class="tag green">Short Play</span>
+                <span class="tag">Group Collaboration</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div class="work-media-placeholder">
+                <span class="ph-icon">🎭</span>
+                insert media here<br>(script / photos / documentation)
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              During the fifth week, our group collaborated to write a short play titled "Secrets on the Beach". We wanted to create dramatic tension, so we chose to use a sudden rainstorm as an external catalyst to break the character's emotional deadlock and force the narrative toward its climax. Every plot twist was the result of group members responding to each other's ideas. My initial suggestion of a "secret" inspired someone else to propose the "moving to London" premise, which combined with the "downpour" to force the story to its conclusion — demonstrating that creative force is distributed throughout the entire team.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ WORK 04 ══ -->
+    <div class="work-entry reveal" id="work-4">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">04</div>
+            <div class="work-title-block">
+              <h3 class="work-title">The Price of Cheating</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 7</span>
+                <span class="tag blue">Short Film</span>
+                <span class="tag">Group Collaboration</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div class="work-media-placeholder">
+                <span class="ph-icon">🎬</span>
+                insert media here<br>(video link / film stills)
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              In week 7, our group collaborated on a short film titled "The Price of Cheating". Facing an initial creative block, I proposed the central concept — a student caught cheating during an exam. My teammates then expanded on this framework, adding fresh plot turns and specific camera angles to convey psychological tension. This work is important because it directly breaks the myth of the "lone genius" and illustrates collective creativity. My initial idea became a reality because the team collectively developed the visual imagery and narrative, proving that the film's success is entirely dependent on the whole team.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ WORK 05 ══ -->
+    <div class="work-entry reveal" id="work-5">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">05</div>
+            <div class="work-title-block">
+              <h3 class="work-title">Silly Painting</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 10</span>
+                <span class="tag green">Collaborative Painting</span>
+                <span class="tag">Chance &amp; Constraint</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div class="work-media-placeholder">
+                <span class="ph-icon">🎨</span>
+                insert media here<br>(photo of painting / scan)
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              In week 10, our group chose to create a silly painting aimed at visually merging completely unrelated, random words. The process began by tossing paper balls covered in words describing anything in the classroom — an exchange that completely stripped us of individual control over the creative materials. We then formed small groups and worked together to create a painting incorporating everyone's words. Creating it required us to listen to each member's words and find unexpected visual connections, demonstrating that combining different elements generates richer imagination than working alone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ WORK 06 ══ -->
+    <div class="work-entry reveal" id="work-6">
+      <div class="work-card">
+        <div class="work-card-bar"></div>
+        <div class="work-card-inner">
+          <div class="work-header">
+            <div class="work-number">06</div>
+            <div class="work-title-block">
+              <h3 class="work-title">A Creativity Manifesto</h3>
+              <div class="work-tags">
+                <span class="tag week">Week 12</span>
+                <span class="tag">Written Manifesto</span>
+                <span class="tag">Reflection &amp; Dialogue</span>
+              </div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-media">
+              <div class="work-media-placeholder">
+                <span class="ph-icon">✍️</span>
+                insert media here<br>(document / scan / typed text)
+              </div>
+            </div>
+            <p class="reflection-label">Reflection</p>
+            <p class="reflection-text">
+              During the week 12 activity, I wrote a piece titled "A Creativity Manifesto". We exchanged ideas about creativity through a "snowball" activity and completed a questionnaire. Two questions resonated strongly: disagreeing with "It's okay to get stuck" and strongly disagreeing with "It doesn't matter if your work looks different from others'". My groupmate helped me answer these, resolving issues that had been troubling me — his answers helped me break through creative pressure, making me realise that overcoming it is not a solitary struggle, but a problem solved with peer support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Xuzhe Lin — Creative Portfolio</span>
+    <span>APA7 References available upon request</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 100);
+        }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
